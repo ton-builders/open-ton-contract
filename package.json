@@ -2,8 +2,10 @@
     "name": "open_blueprint",
     "version": "0.0.1",
     "scripts": {
+        "deploy": "blueprint run",
         "start": "blueprint run",
         "build": "blueprint build",
+        "create": "blueprint create ",
         "test": "jest --verbose"
     },
     "devDependencies": {
@@ -20,5 +22,6 @@
         "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.6.3"
-    }
+    },
+    "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
 }
