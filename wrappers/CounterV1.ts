@@ -13,17 +13,20 @@ export const Opcodes = {
     increase: 0x7e8764ef,
 };
 
-export class Counter1 implements Contract {
-    constructor(readonly address: Address, readonly init?: { code: Cell; data: Cell }) {}
+export class CounterV1 implements Contract {
+    constructor(
+        readonly address: Address,
+        readonly init?: { code: Cell; data: Cell },
+    ) {}
 
     static createFromAddress(address: Address) {
-        return new Counter1(address);
+        return new CounterV1(address);
     }
 
     static createFromConfig(config: SecondContractConfig, code: Cell, workchain = 0) {
         const data = secondContractConfigToCell(config);
         const init = { code, data };
-        return new Counter1(contractAddress(workchain, init), init);
+        return new CounterV1(contractAddress(workchain, init), init);
     }
 
     async sendDeploy(provider: ContractProvider, via: Sender, value: bigint) {
@@ -41,7 +44,7 @@ export class Counter1 implements Contract {
             increaseBy: number;
             value: bigint;
             queryID?: number;
-        }
+        },
     ) {
         await provider.internal(via, {
             value: opts.value,

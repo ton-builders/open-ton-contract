@@ -1,3 +1,7 @@
+#include "imports/stdlib.fc";
+const op::increase = "op::increase"c;
+const op::decrease = "op::decrease"c;
+
 ;; ===================== 说明 =====================
 ;;
 ;; 改写默认的 counter 合约，
@@ -5,10 +9,6 @@
 ;; 2. 新增一个 op::decrease，用于减少
 ;;
 ;; ===================== 说明 =====================
-
-#include "imports/stdlib.fc";
-const op::increase ="op::increase"c;
-const op::decrease ="op::decrease"c;
 
 ;; int_msg_info$0 ihr_disabled:Bool bounce:Bool bounced:Bool
 ;; src:MsgAddressInt dest:MsgAddressInt
@@ -38,8 +38,8 @@ const op::decrease ="op::decrease"c;
         int increase_by = in_msg_body~load_uint(32);
 
         var ds = get_data().begin_parse();
-        int id = ds.begin_parse()~load_uint(32);
-        int counter = ds.begin_parse()~load_uint(32);
+        int id = ds~load_uint(32);
+        int counter = ds~load_uint(32);
         counter += increase_by;
 
         set_data(
@@ -56,8 +56,8 @@ const op::decrease ="op::decrease"c;
         int increase_by = in_msg_body~load_uint(32);
 
         var ds = get_data().begin_parse();
-        int id = ds.begin_parse()~load_uint(32);
-        int counter = ds.begin_parse()~load_uint(32);
+        int id = ds~load_uint(32);
+        int counter = ds~load_uint(32);
         counter -= increase_by;
 
         set_data(
@@ -76,11 +76,13 @@ const op::decrease ="op::decrease"c;
 
 
 int get_id() method_id {
-    return get_data().begin_parse()~load_uint(32);
+    var ds = get_data().begin_parse();
+    return ds~load_uint(32);
 }
 
-
 int get_counter() method_id {
-    return get_data().begin_parse()~skip_bits(32)~load_uint(32);
+    var ds = get_data().begin_parse();
+    ds~skip_bits(32);
+    return ds~load_uint(32);
 }
 

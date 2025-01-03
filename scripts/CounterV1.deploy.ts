@@ -1,15 +1,15 @@
 import { toNano } from '@ton/core';
-import { Counter1 } from '../wrappers/Counter1';
+import { CounterV1 } from '../wrappers/CounterV1';
 import { compile, NetworkProvider } from '@ton/blueprint';
 
 export async function run(provider: NetworkProvider) {
     const secondContract = provider.open(
-        Counter1.createFromConfig(
+        CounterV1.createFromConfig(
             {
                 id: Math.floor(Math.random() * 10000),
                 counter: 0,
             },
-            await compile('Counter1'),
+            await compile('CounterV1'),
         ),
     );
 

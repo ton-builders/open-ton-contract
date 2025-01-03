@@ -1,6 +1,6 @@
 import { Blockchain, SandboxContract, TreasuryContract } from '@ton/sandbox';
 import { Cell, toNano } from '@ton/core';
-import { Counter1 } from '../wrappers/Counter1';
+import { CounterV1 } from '../wrappers/CounterV1';
 import '@ton/test-utils';
 import { compile } from '@ton/blueprint';
 
@@ -13,19 +13,19 @@ describe('Counter1', () => {
 
     let blockchain: Blockchain;
     let deployer: SandboxContract<TreasuryContract>;
-    let secondContract: SandboxContract<Counter1>;
+    let secondContract: SandboxContract<CounterV1>;
 
     beforeEach(async () => {
         blockchain = await Blockchain.create();
 
         secondContract = blockchain.openContract(
-            Counter1.createFromConfig(
+            CounterV1.createFromConfig(
                 {
                     id: 0,
                     counter: 0,
                 },
-                code
-            )
+                code,
+            ),
         );
 
         deployer = await blockchain.treasury('deployer');
