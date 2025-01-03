@@ -1,11 +1,11 @@
 import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from '@ton/core';
 
-export type SecondContractConfig = {
+type CounterV1Config = {
     id: number;
     counter: number;
 };
 
-export function secondContractConfigToCell(config: SecondContractConfig): Cell {
+function configToCell(config: CounterV1Config): Cell {
     return beginCell().storeUint(config.id, 32).storeUint(config.counter, 32).endCell();
 }
 
@@ -23,8 +23,8 @@ export class CounterV1 implements Contract {
         return new CounterV1(address);
     }
 
-    static createFromConfig(config: SecondContractConfig, code: Cell, workchain = 0) {
-        const data = secondContractConfigToCell(config);
+    static createFromConfig(config: CounterV1Config, code: Cell, workchain = 0) {
+        const data = configToCell(config);
         const init = { code, data };
         return new CounterV1(contractAddress(workchain, init), init);
     }

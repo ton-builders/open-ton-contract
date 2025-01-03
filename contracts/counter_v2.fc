@@ -32,7 +32,7 @@ const op::decrease = "op::decrease"c;
     ;; 但通常会遵循以下惯例，以确保消息在智能合约中易于解析：
     ;; in_msg_body ::= op:uint32 query_id:uint64 payload:(optional)
     int op = in_msg_body~load_uint(32);
-    ;; int query_id = in_msg_body~load_uint(64);
+    in_msg_body~skip_bits(64);  ;;query_id
 
     if (op == op::increase) {
         int increase_by = in_msg_body~load_uint(32);

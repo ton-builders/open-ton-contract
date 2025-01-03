@@ -1,5 +1,4 @@
-import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender } from '@ton/core';
-import { SendMode } from '@ton/core/src/types/SendMode';
+import { Address, beginCell, Cell, Contract, contractAddress, ContractProvider, Sender, SendMode } from '@ton/core';
 
 export type CounterV2Config = {
     id: number;

@@ -12,26 +12,27 @@ export async function run(provider: NetworkProvider, args: string[]) {
         return;
     }
 
-    const secondContract = provider.open(CounterV1.createFromAddress(address));
+    const opened = provider.open(CounterV1.createFromAddress(address));
 
-    const counterBefore = await secondContract.getCounter();
+    const before = await opened.getCounter();
 
-    await secondContract.sendIncrease(provider.sender(), {
-        increaseBy: 1,
+    await opened.sendIncrease(provider.sender(), {
+        increaseBy: 123,
         value: toNano('0.05'),
     });
 
     ui.write('Waiting for counter to increase...');
 
-    let counterAfter = await secondContract.getCounter();
+    let after = await opened.getCounter();
     let attempt = 1;
-    while (counterAfter === counterBefore) {
+    while (after === before) {
         ui.setActionPrompt(`Attempt ${attempt}`);
         await sleep(2000);
-        counterAfter = await secondContract.getCounter();
+        after = await opened.getCounter();
         attempt++;
     }
 
     ui.clearActionPrompt();
     ui.write('Counter increased successfully!');
+    ui.write(`Counter increased from ${before} to ${after}`);
 }

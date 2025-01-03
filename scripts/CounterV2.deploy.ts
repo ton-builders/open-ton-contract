@@ -6,7 +6,7 @@ export async function run(provider: NetworkProvider) {
     let contract = CounterV2.createFromConfig(
         {
             id: Math.floor(Math.random() * 10000),
-            counter: 0,
+            counter: 20000,
         },
         await compile('CounterV2'),
     );
