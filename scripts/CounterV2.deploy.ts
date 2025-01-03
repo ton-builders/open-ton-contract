@@ -16,5 +16,5 @@ export async function run(provider: NetworkProvider) {
 
     await provider.waitForDeploy(opened.address);
 
-    console.log('getCounter: ', await opened.getCounter());
+    console.log('deploy successful. getCounter: ', await opened.getCounter());
 }

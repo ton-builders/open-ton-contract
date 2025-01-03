@@ -2,7 +2,6 @@ import { NetworkProvider, sleep } from '@ton/blueprint';
 import { Address, toNano } from '@ton/core';
 import { CounterV2 } from '../wrappers/CounterV2';
 
-// EQAM8QqkBeiFJqsS3NPJe_jh9IqCetEMncSkFrBVmHU3qAiw
 export async function run(provider: NetworkProvider, args: string[]) {
     const ui = provider.ui();
 
@@ -20,18 +19,35 @@ export async function run(provider: NetworkProvider, args: string[]) {
 
     await opened.sendIncrease(provider.sender(), { increaseBy: 100, value: toNano('0.05') });
 
-    ui.write('增加 100 ');
+    ui.write('add 100 ');
 
-    let after = await opened.getCounter();
+    let afterIncrease = await opened.getCounter();
 
     let attempt = 1;
-    while (after === before) {
+    while (afterIncrease === before) {
         ui.setActionPrompt(`Attempt ${attempt}`);
         await sleep(2000);
-        after = await opened.getCounter();
+        afterIncrease = await opened.getCounter();
         attempt++;
     }
 
     ui.clearActionPrompt();
-    ui.write(`Counter increased from ${before} to ${after}`);
+    ui.write(`Counter increased from ${before} to ${afterIncrease}`);
+
+    // ## decrease
+
+    await opened.sendDecrease(provider.sender(), { decreaseBy: 2000, value: toNano('0.05') });
+    ui.write('minus 2000 ');
+
+    let afterDecrease = await opened.getCounter();
+    attempt = 1;
+    while (afterDecrease === afterIncrease) {
+        ui.setActionPrompt(`Attempt ${attempt}`);
+        await sleep(2000);
+        afterDecrease = await opened.getCounter();
+        attempt++;
+    }
+
+    ui.clearActionPrompt();
+    ui.write(`Counter decreased from ${afterIncrease} to ${afterDecrease}`);
 }

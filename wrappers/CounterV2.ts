@@ -81,6 +81,26 @@ export class CounterV2 implements Contract {
         });
     }
 
+    async sendDecrease(
+        provider: ContractProvider,
+        via: Sender,
+        opts: {
+            decreaseBy: number;
+            value: bigint;
+            queryID?: number;
+        },
+    ) {
+        await provider.internal(via, {
+            value: opts.value,
+            sendMode: SendMode.PAY_GAS_SEPARATELY,
+            body: beginCell()
+                .storeUint(Opcodes.decrease, 32)
+                .storeUint(opts.queryID ?? 0, 64)
+                .storeUint(opts.decreaseBy, 32)
+                .endCell(),
+        });
+    }
+
     async getCounter(provider: ContractProvider) {
         let result = await provider.get('get_counter', []);
         return result.stack.readNumber();
