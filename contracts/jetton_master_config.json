@@ -1,7 +1,7 @@
 {
-  "name": "Sample Jetton",
-  "description": "Sample of Jetton",
-  "symbol": "JTN",
-  "decimals": 0,
-  "image": "https://www.svgrepo.com/download/483336/coin-vector.svg"
+  "name": "Jetton Demo",
+  "description": "Demo of Jetton",
+  "symbol": "JDEMO",
+  "decimals": 9,
+  "image": "https://www.svgrepo.com/download/421033/diamon-gift-pesent.svg"
 }

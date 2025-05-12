@@ -2,16 +2,24 @@ import { compile, NetworkProvider } from '@ton/blueprint';
 import { JettonMasterFuncContract } from '../wrappers/JettonMasterFuncContract';
 import { Address, beginCell, toNano } from '@ton/core';
 
-const contentUrl = 'https://raw.githubusercontent.com/ton-builders/open-ton-contract/refs/heads/main/master.json';
-const formatUrl =
-    'https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain';
-const exampleContent = {
-    name: 'Sample Jetton',
-    description: 'Sample of Jetton',
-    symbol: 'JTN',
-    decimals: 0,
-    image: 'https://www.svgrepo.com/download/483336/coin-vector.svg',
-};
+
+// TODO：change jetton information in this file
+// TODO：change jetton information in this file
+// TODO：change jetton information in this file
+// TODO：change jetton information in this file
+// TODO：change jetton information in this file
+const contentUrl = 'https://raw.githubusercontent.com/ton-builders/open-ton-contract/refs/heads/main/contracts/jetton_master_config.json';
+
+
+// const formatUrl =
+//     'https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain';
+// const exampleContent = {
+//     name: 'Sample Jetton',
+//     description: 'Sample of Jetton',
+//     symbol: 'JTN',
+//     decimals: 0,
+//     image: 'https://www.svgrepo.com/download/483336/coin-vector.svg',
+// };
 
 export type JettonMinterContent = {
     // 0 onchain  1: offchain
