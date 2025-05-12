@@ -1,3 +1,9 @@
+#include "lib/stdlib.fc";
+#include "lib/jetton-utils.fc";
+#include "lib/op-codes.fc";
+#include "lib/discovery-params.fc";
+
+
 ;; Jetton Wallet Smart Contract
 
 {-
